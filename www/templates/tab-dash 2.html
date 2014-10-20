@@ -1,0 +1,44 @@
+<ion-view title="Dashboard">
+  <ion-content class="padding">
+  <div ng-controller="Logins">
+    <div ng-hide="currentUser">
+	    <form ng-show="scenario == 'Sign up'">
+	      <h2>Sign up</h2>
+	      Email: <input type="email" ng-model="user.email" /><br />
+	      Username: <input type="text" ng-model="user.username" /><br />
+	      Password: <input type="password" ng-model="user.password" /><br />
+	      <button ng-click="signUp(user)">Sign up</button>
+	      or <a href="#" ng-click='scenario="Log in"'>Log in</a>
+	    </form>
+	    
+	    <form ng-show="scenario == 'Log in'">
+	      <h2>Log in</h2>
+	      Username: <input type="text" ng-model="user.username" /><br />
+	      Password: <input type="password" ng-model="user.password" /><br />
+	      <button ng-click="logIn(user)">Log in</button>
+	      or <a href="#" ng-click='scenario="Sign up"'>Sign up</a>
+	    </form>
+	  </div>
+	  
+	  <div ng-show="currentUser">
+	    <h1>Welcome {{currentUser.get('username')}}</h1>
+	    <p> You have been successfully logged in</p>
+	    <button ng-click="logOut(user)">Log out</button>
+	  </div>
+  </div>
+  <div ng-controller="CreateEvent">
+	  <form>
+	      <h2>Create Event</h2>
+	      Event Title: <input type="text" ng-model="event.title" /><br />
+	      <button ng-click="create(event)">Create Event</button>
+	    </form>
+  </div>
+  <div ng-controller="ListEvents">
+      <ion-list>
+        <ion-item ng-repeat="item in items">
+        {{item.title}}
+        </ion-item>
+    </ion-list>
+  </div>
+  </ion-content>
+</ion-view>
