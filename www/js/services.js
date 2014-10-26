@@ -43,6 +43,30 @@ angular.module('starter.services', [])
                 }
             });
         },
+        
+        getType:function(type, subtype) {
+        console.log(type);
+        var _t = type;
+          //var query = encodeURIComponent('where=' + '{"' + type + '":"' + subtype + '"}');
+	      
+	      //this should work but maybe not with where
+	      //var query = encodeURIComponent('where=' + '{"' + type + '":"' + subtype + '","include":"creator.email"}');
+		  //var query = encodeURIComponent({'{where' : '{"' + type + '":"' + subtype + '"}, limit:2}'});
+		  //console.log(query)
+	      //var query = encodeURIComponent('where=' + '{"' + type + '":"' + subtype + '"}');
+	      //var query = encodeURIComponent('where=' + '{"' + type + '":"' + subtype + '", "limit":2}');
+	      	return $http.get('https://api.parse.com/1/classes/events',
+     
+	        	 {
+	        	 headers:{
+                    'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+                    'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+                   	'Content-Type' : 'application/json'
+                },
+                 //params: {where : {senses:"touch", limit:2} }
+              })
+		},              
+	        
         create:function(data){
         	console.log("HELLO");
             return $http.post('https://api.parse.com/1/classes/events',data,{

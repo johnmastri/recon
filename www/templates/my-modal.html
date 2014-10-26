@@ -1,0 +1,158 @@
+<ion-modal-view ng-controller="CreateEventCtrl">
+		    <ion-header-bar>
+		      <h1 class="title">Create An Event</h1>
+		      <button class="button button-clear button-primary disable-user-behavior" ng-click="modal.hide()">Cancel</button>
+		    </ion-header-bar>
+		    <ion-content> 
+		    <label class="item item-input">
+              <span class="input-label">Event name</span>
+              <input type="text" ng-model="event.title">
+            </label>
+		      <div class="list">
+              <span class="input-label">Event Details</span>
+              <textarea rows="4" ng-model="event.detail"></textarea>
+              			  
+          </div>          
+          
+         <!-- <ion-google-place placeholder="Enter an address, Apt# and ZIP" ng-model="location" />
+          -->
+			<label class="item item-input">
+				<span class="input-label">Start Date</span>
+				<my-date-time-picker placeholder="Enter Date here" title="Select Date" ng-model="event.date_start" />
+			</label>
+			<label class="item item-input">
+				<span class="input-label">End Date</span>
+				<my-date-time-picker placeholder="Enter Date here" title="Select Date" ng-model="event.date_end" />
+			</label>
+          
+                    
+          <div class="list">
+          <div class="item item-divider">
+            Select One for Basics
+          </div>
+        
+          <label class="item item-radio">
+            <input type="radio" name="group_basics">
+            <div class="item-content">
+             Eat
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group_basics">
+            <div class="item-content">
+              Sleep
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group_basics">
+            <div class="item-content">
+              Walk
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group_basics">
+            <div class="item-content">
+              Run
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group_basics">
+            <div class="item-content">
+              Dance
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          
+          
+          <div class="list">
+          <div class="item item-divider">
+            Select One for Impulse
+          </div>
+        
+          <label class="item item-radio">
+            <input type="radio" name="group_impulse">
+            <div class="item-content">
+             Buy
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group_impulse">
+            <div class="item-content">
+              Wild
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group_impulse">
+            <div class="item-content">
+              Sexy
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group_impulse">
+            <div class="item-content">
+              Smart
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group_impulse">
+            <div class="item-content">
+              Weird
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          
+          
+          <div class="list">
+          <div class="item item-divider">
+            Select One for Senses
+          </div>
+        
+          <label class="item item-radio">
+            <input type="radio" name="group_senses">
+            <div class="item-content">
+             Touch
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group_senses">
+            <div class="item-content">
+              Taste
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group_senses">
+            <div class="item-content">
+              Smell
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group_senses">
+            <div class="item-content">
+              Hear
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group_senses">
+            <div class="item-content">
+              See
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label> 
+          
+           <button class="button button-block button-positive" ng-click="createEvent(event)">Create Event</button>
+         
+
+	</ion-content>
+</ion-modal-view>

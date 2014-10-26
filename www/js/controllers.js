@@ -1,58 +1,32 @@
 angular.module('starter.controllers', ['ionic', 'ui.bootstrap.datetimepicker', 'ion-google-place'])
 
-.controller('DashCtrl', function($scope) {
+.controller('EventsListCtrl', function($scope, $stateParams) {
+	$scope.type = $stateParams.type;
 })
-
+/*
 .controller('FriendsCtrl', function($scope, Friends) {
   $scope.friends = Friends.all();
 })
 
 .controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
   $scope.friend = Friends.get($stateParams.friendId);
-})
+})
+*/
 
-.controller('AccountCtrl', function($scope) {
-})
+.controller('LoginCtrl', function($scope, $state) {
 
-.controller('Logins', function($scope) {
-
-  $scope.scenario = 'Sign up';
-  $scope.currentUser = Parse.User.current();
-  
-  $scope.signUp = function(form) {
-  
-  	Parse.Cloud.run('hello', {}, {
-	  success: function(result) {
-	    // result is 'Hello world!'
-	    console.log(result);
-	  },
-	  error: function(error) {
-	  }
-	});
-  
-    var user = new Parse.User();
-    user.set("email", form.email);
-    user.set("username", form.username);
-    user.set("password", form.password);
-    user.set("ACL", new Parse.ACL());
+ // $scope.scenario = 'Sign up';
+  $scope.currentUser = Parse.User.current();  
     
-    user.signUp(null, {
-      success: function(user) {
-        $scope.currentUser = user;
-        $scope.$apply();
-      },
-      error: function(user, error) {
-        alert("Unable to sign up:  " + error.code + " " + error.message);
-      }
-    });    
-  };
+  $scope.state = $state;
   
-  $scope.logIn = function(form) {
-    Parse.User.logIn(form.username, form.password, {
-      success: function(user) {
-      console.log(user);
-        $scope.currentUser = user;
+  $scope.logIn = function(user) {
+    Parse.User.logIn(user.email, user.password, {
+      success: function(user_r) {
+      console.log(user_r);
+        $scope.currentUser = user_r;
         $scope.$apply();
+        $scope.state.go('conferencecode');
       },
       error: function(user, error) {
         alert("Unable to log in: " + error.code + " " + error.message);
@@ -66,23 +40,186 @@ angular.module('starter.controllers', ['ionic', 'ui.bootstrap.datetimepicker', '
   };
 })
 
-.controller('CreateEvent', ['$scope', '$http','Events', function($scope, $http, Events) {
 
-	$scope.create = function(event) {
+
+.controller('SignInCtrl', function($scope, $state) {
+  
+  $scope.signIn = function(user) {
+    console.log('Sign-In', user);
+    $state.go('conferencecode');
+  };
+  
+})
+
+.controller("SignUpCtrl", function($scope, $rootScope, $state) {
+	
+	$scope.signUp = function(form) {
+  
+  	/*Parse.Cloud.run('hello', {}, {
+	  success: function(result) {
+	    // result is 'Hello world!'
+	    console.log(result);
+	  },
+	  error: function(error) {
+	  }
+	});*/
+  
+    $rootScope.user = new Parse.User();
+    $rootScope.user.set("username", form.email);
+    $rootScope.user.set("email", form.email);
+    $rootScope.user.set("first_name", form.first_name);
+    $rootScope.user.set("last_name", form.last_name);
+    $rootScope.user.set("password", form.password);
+    $rootScope.user.set("ACL", new Parse.ACL());
+    
+    console.log($rootScope.user);
+    
+    $state.go("uploadphoto");
+      
+  };
+	
+})
+
+.controller("UploadPhotoCtrl", function($scope) {
+	
+	
+})
+
+.controller("TermsCtrl", function($scope, $rootScope, $state) {
+
+	$scope.signUp = function() {
+	
+		/*var user = $rootScope.user;
 		
-		
-		console.log(event);
- 		var ev = {title:event.title};
+		 user.signUp(null, {
+	      success: function(user) {
+	        $scope.currentUser = user;
+	        $scope.$apply();
+	        console.log("SIGNED UP");
+	        console.log(user);
+	        
+	        $state.go("menu.tab.eventslist");
+	        
+	      },
+	      error: function(user, error) {
+	        alert("Unable to sign up:  " + error.code + " " + error.message);
+	      }
+	    });*/
+	    
+	    $state.go("menu.tab.eventslist"); 
+    
+    }
+	
+})
+
+.controller('ForgotPasswordCtrl', function($scope, $ionicNavBarDelegate) {
+  
+  $scope.swipe = function (direction) 
+   {
+        console.warn('Swipe:  ' + direction);
+        $ionicNavBarDelegate.back();
+    }
+  
+})
+
+.controller('ConferenceCodeCtrl', function($scope, $state, $ionicNavBarDelegate) {
+  
+  //$state.go('tab.home');
+  
+  $scope.submitCode = function (user) {
+	  
+	  $state.go("tab.eventslist");
+	  
+  }
+  
+  $scope.swipe = function (direction) 
+   {
+        console.warn('Swipe:  ' + direction);
+        $ionicNavBarDelegate.back();
+        
+    }
+  
+})
+
+
+
+
+.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $ionicModal) {
+
+  $scope.toggleLeft = function() {
+    $ionicSideMenuDelegate.toggleLeft();
+  };   
+             
+  /*$ionicModal.fromTemplateUrl('modal.html', function (modal) {
+    $scope.modal = modal;
+  }, {
+    animation: 'slide-in-up'
+  });*/
+
+ })
+
+
+
+.controller('EventListViewCtrl', function($scope, $ionicModal) {
+	
+	//<select style="opacity:0; width:100%; position:absolute; z-index=100" ng-options="option for option in question.options">
+	//<select ng-model="myColor" ng-options="color.name for color in colors">
+	
+	$scope.select_options = [{name:"senses", values:["Touch","Taste","Smell","Hear","See"]},
+						     {name:"impulses", values:["Buy","Wild","Sexy","Smart","Weird"]},
+						     {name:"basics", values:["Eat","Sleep","Walk","Run","Dance"]}];
+	
+	//$scope.correctlySelected = $scope.options[1];
+	$scope.view_select_value = $scope.select_options[0];
+	
+	
+	$scope.$watch('view_select_value', function() {
+        $scope.list_values = $scope.view_select_value.values;
+    });
+    
+    $scope.showBy = function(arg) {
+	    
+	    console.log(arg);
+	    
+    }
+    
+    /////
+    
+    	
+	 $ionicModal.fromTemplateUrl('templates/my-modal.html', function (modal) {
+	    $scope.modal = modal;
+	  }, {
+	    animation: 'slide-in-up',
+	    focusFirstInput: true
+	  });
+	  		
+})
+
+.controller('ModalCtrl', function($scope, $ionicPopup, $filter, $ionicModal) {
+  
+  $scope.event = {};
+  
+  $scope.createEvent = function() {
+	  	  
+  };
+
+})
+
+.controller('CreateEventCtrl', ['$scope', '$http','Events', function($scope, $http, Events) {
+
+	$scope.event = null;
+	$scope.createEvent = function(event) {
+				
+		console.log(event); 		
  		var user = Parse.User.current();
- 		console.log("UERSER");
  		console.log(user);
- 		ev.creator = {
+ 		event.creator = {
 		  "__type": "Pointer",
 		  "className": "_User",
 		  "objectId": user.id
 		}
 		
- 		Events.create(ev).success(function(data) { 		
+ 		Events.create(event).success(function(data) { 		
  			console.log(data);
  			var _st = Parse.User.current()._sessionToken;
  			$http.put('https://api.parse.com/1/users/' + Parse.User.current().id, 
@@ -101,6 +238,7 @@ angular.module('starter.controllers', ['ionic', 'ui.bootstrap.datetimepicker', '
 				console.log(status);
 				console.log(headers);
 				console.log(config);
+				$scope.modal.hide();
 			});
 			
 		});
@@ -130,9 +268,29 @@ angular.module('starter.controllers', ['ionic', 'ui.bootstrap.datetimepicker', '
 
 }])
 
+.controller('EventDetailCtrl', function($scope) {
+		
+	
+})
+
+
+.controller('FacesCtrl', function($scope) {
+		
+	
+})
+
+.controller('TrendingCtrl', function($scope) {
+		
+	
+})
+
+.controller('PlacesCtrl', function($scope) {
+	
+	$scope.place = null;
+	
+})
 
 .controller('ListEvents', ['$scope', 'Events', function($scope, Events) {
-
 
 	Events.getAll().success(function(data) { 		
  			$scope.items = data.results;
@@ -140,116 +298,78 @@ angular.module('starter.controllers', ['ionic', 'ui.bootstrap.datetimepicker', '
  
 }])
 
-.controller('SignInCtrl', function($scope, $state) {
-  
-  $scope.signIn = function(user) {
-    console.log('Sign-In', user);
-    $state.go('conferencecode');
-  };
-  
-})
-
-.controller('ForgotPasswordCtrl', function($scope, $ionicNavBarDelegate) {
-  
-  $scope.swipe = function (direction) 
-   {
-        console.warn('Swipe:  ' + direction);
-        $ionicNavBarDelegate.back();
-    }
-  
-})
-
-.controller('ConferenceCodeCtrl', function($scope, $state, $ionicNavBarDelegate) {
-  
-  //$state.go('tab.home');
-  
-  $scope.submitCode = function (user) {
-	  
-	  $state.go("tab.home");
-	  
-  }
-  
-  $scope.swipe = function (direction) 
-   {
-        console.warn('Swipe:  ' + direction);
-        $ionicNavBarDelegate.back();
-        
-    }
-  
-})
-
-
-.controller('EventListViewCtrl', function($scope, $ionicModal) {
+.controller('EventsViewCtrl', function($scope, $stateParams, Events) {
 	
-	//<select style="opacity:0; width:100%; position:absolute; z-index=100" ng-options="option for option in question.options">
-	//<select ng-model="myColor" ng-options="color.name for color in colors">
-	
-	$scope.select_options = [{name:"senses", values:["Touch","Taste","Smell","Hear","See"]},
-						     {name:"impulse", values:["Buy","Wild","Sexy","Smart","Weird"]},
-						     {name:"basics", values:["Eat","Sleep","Walk","Run","Dance"]}];
-	
-	//$scope.correctlySelected = $scope.options[1];
-	$scope.view_select_value = $scope.select_options[0];
-	
-	
-	$scope.$watch('view_select_value', function() {
-        $scope.list_values = $scope.view_select_value.values;
-    });
-	
-	console.log($scope.view_select_value);
-	
-	 $ionicModal.fromTemplateUrl('my-modal.html', function (modal) {
-	    $scope.modal = modal;
-	  }, {
-	    animation: 'slide-in-up',
-	    focusFirstInput: true
-	  });
-	
+	$scope.type = $stateParams.type;
+	$scope.subtype = $stateParams.subtype;
+	console.log($scope.items);
+	if($scope.items == undefined) {
 		
+		$scope.items = null;
+		console.log($scope.type + " KTY");
+		Events.getType($scope.type, $scope.subtype).success(function(data) { 		
+	 			$scope.items = data.results;
+	 			console.log($scope.items);
+	 	});
+	 	
+ 	} 
+
 })
-/*
-.controller('ModalCtrl', function($scope, $ionicPopup, $filter) {
-  
-  $scope.newUser = {};
-
-  $scope.$watch('newUser.birthDate', function(unformattedDate){
-    $scope.newUser.formattedBirthDate = $filter('date')(unformattedDate, 'dd/MM/yyyy HH:mm');
-  });
-
-  $scope.createContact = function() {
-    console.log('Create Contact', $scope.newUser);
-    $scope.modal.hide();
-  };
-    
-  $scope.openDatePicker = function() {
-    $scope.tmp = {};
-    $scope.tmp.newDate = $scope.newUser.birthDate;
-    
-    var birthDatePopup = $ionicPopup.show({
-     template: '<datetimepicker ng-model="tmp.newDate"></datetimepicker>',
-     title: "Birth date",
-     scope: $scope,
-     buttons: [
-       { text: 'Cancel' },
-       {
-         text: '<b>Save</b>',
-         type: 'button-positive',
-         onTap: function(e) {
-           $scope.newUser.birthDate = $scope.tmp.newDate;
-         }
-       }
-     ]
-    });
-  }
-});*/
 
 
-.controller('PlacesCtrl', function($scope) {
+//Menu Controls
+
+
+.controller('MyEventsCtrl', function($scope) {
+
+	$scope.data = {
+		showDelete: false		
+	}
 	
-	$scope.place = null;
-	'ion-google-place'
+	$scope.items = [{title:"My Event 1", description:"My Event Description Goes Here"},
+	{title:"My Event 2", description:"My Event Description Goes Here"},
+	{title:"My Event 3", description:"My Event Description Goes Here"},
+	{title:"My Event 4", description:"My Event Description Goes Here"}];
+	
+	$scope.editEvent = function(item) {
+		
+		console.log("edit this event");
+		
+	}
+	
+	$scope.deleteEvent = function(item) {
+		
+		console.log("delete this event");
+		
+	}
 	
 })
+
+.controller('ProfileCtrl', function($scope) {
+	
+	
+})
+
+.controller('AboutCtrl', function($scope) {
+	
+	
+})
+
+.controller('RequestCodeCtrl', function($scope) {
+	
+	
+})
+
+.controller('TermsViewOnlyCtrl', function($scope) {
+	
+	
+})
+
+.controller('LogOutCtrl', function($scope) {
+	
+	
+})
+
 
 /*
 .directive('googleplace', function() {
@@ -281,7 +401,7 @@ function MyCtrl($scope) {
 
 
 
-/*
+
 
 .directive('myDateTimePicker', function ($ionicPopup) {
   return {
@@ -322,7 +442,11 @@ function MyCtrl($scope) {
       }; //scope.popup();
     }
   };
-})*/
+})
+
+
+
+
 ;
 
 function MyCtrl($scope) {

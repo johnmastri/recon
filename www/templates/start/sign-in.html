@@ -1,0 +1,31 @@
+<ion-view title="Sign-In" ng-controller="LoginCtrl">
+
+<ion-nav-bar class="nav-title-slide-ios7 bar-positive" title="Sign In">
+  </ion-nav-bar>
+  
+	<ion-content scroll="false">
+	  <div class="list">
+	    <label class="item item-input item-stacked-label">
+	      <span class="input-label">Email</span>
+	      <input type="text" ng-model="user.email">
+	    </label>
+	    <label class="item item-input item-stacked-label">
+	      <span class="input-label">Password</span>
+	      <input type="password" ng-model="user.password">
+	    </label>
+	  </div>
+	  <div class="padding">
+	    <button class="button button-block button-positive" ng-click="logIn(user)">
+	      Sign-In
+	    </button>
+	    <p class="text-center">
+	      <a href="#/forgot-password">Forgot password!</a>
+	    </p>
+	    
+	    <p class="text-center">
+	      <a href="#/sign-up">Don't have an account? Sign up</a>
+	    </p>
+	    
+	  </div>
+	</ion-content>
+</ion-view>

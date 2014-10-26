@@ -1,0 +1,22 @@
+<ion-view title="Enter Conference Code">
+    <ion-content>
+      <p class="text-center">
+          To preview Recon, enter AWESOMESAUCEEXPO
+        </p>
+      <div class="list">
+      
+        <label class="item item-input">
+          <span class="input-label">Conference Code</span>
+          <input type="text" ng-model="code.conference_code">
+        </label>
+      </div>
+      <div class="padding">
+        <button class="button button-block button-positive" ng-click="submitCode(user)">
+          Submit Code
+        </button>
+        <p class="text-center">
+          <a href="#/forgot-password">Request Conference Code</a>
+        </p>
+      </div>
+    </ion-content>
+</ion-view>

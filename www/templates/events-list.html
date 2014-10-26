@@ -49,7 +49,7 @@
     	</div>
     	<div class="list">
     	<ion-list>
-    	    <ion-item ng-repeat="value in list_values">{{value}}</ion-item>
+    	    <ion-item ng-repeat="value in list_values" ng-click="showBy(value)" href="#/menu/events_view/{{view_select_value.name}}/{{value | lowercase}}">{{value}}</ion-item>
     	 </ion-list>		
     	</div>
     </div>
