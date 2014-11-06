@@ -7,17 +7,18 @@
     </ion-nav-buttons>
 
 </ion-nav-bar>
-<ion-tabs class="tabs-icon-top">
+
+<ion-tabs class="tabs-icon-top" ng-class="$root.tabsHidden">
 
 
   <!-- Dashboard Tab -->
-  <ion-tab title="Events" icon="icon ion-navicon" href="#/menu/tab/eventslist">
+  <ion-tab title="List" icon="icon ion-navicon" href="#/menu/tab/eventslist">
     <ion-nav-view name="tab-eventslist"></ion-nav-view>
   </ion-tab>
 
 
   <!-- Friends Tab -->
-  <ion-tab title="Faces" icon="icon ion-person" href="#/menu/tab/faces">
+  <ion-tab title="Peeps" icon="icon ion-person" href="#/menu/tab/faces">
     <ion-nav-view name="tab-faces"></ion-nav-view>
   </ion-tab>
 

@@ -1,18 +1,8 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-
-
-
 Parse.initialize("jXSIMBK3P0LkAIuF6wmK689RQgiVLL95BJxy8yUA", "Pge7WSHTkSVAa6kv6APQM9s39R07Cx2IXqW3BZJa"); 
 
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','angularFileUpload','ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, $ionicModal, $ionicPopover, $cordovaStatusbar) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,63 +11,30 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
     if(window.StatusBar) {
       // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
+      //StatusBar.styleDefault();
+      $cordovaStatusar.styleHex('#34a8c8');
+      
     }
-  });
-  
-  
-/*
-
-angular.module('AuthApp', [])
-.run(['$rootScope', function($scope) {
-  $scope.scenario = 'Sign up';
-  $scope.currentUser = Parse.User.current();
-  
-  $scope.signUp = function(form) {
-    var user = new Parse.User();
-    user.set("email", form.email);
-    user.set("username", form.username);
-    user.set("password", form.password);
     
-    user.signUp(null, {
-      success: function(user) {
-        $scope.currentUser = user;
-        $scope.$apply();
-      },
-      error: function(user, error) {
-        alert("Unable to sign up:  " + error.code + " " + error.message);
-      }
-    });    
-  };
-  
-  $scope.logIn = function(form) {
-    Parse.User.logIn(form.username, form.password, {
-      success: function(user) {
-        $scope.currentUser = user;
-        $scope.$apply();
-      },
-      error: function(user, error) {
-        alert("Unable to log in: " + error.code + " " + error.message);
-      }
-    });
-  };
-  
-  $scope.logOut = function(form) {
-    Parse.User.logOut();
-    $scope.currentUser = null;
-  };
-}
-	  
-  */
+    $ionicModal.fromTemplateUrl('templates/events-create.html', {
+	    scope: $rootScope
+	}).then(function(modal) {
+	    $rootScope.modal = modal;
+	});
+	
+	 $ionicPopover.fromTemplateUrl('my-popover.html', {
+	    scope: $rootScope,
+	  }).then(function(popover) {
+	    $rootScope.popover = popover;
+	    
+	  });
+       
+  });  
   
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
   $stateProvider
 
     // SIGN IN SIGN UP FORGOT PASSWORD CONFERENCE CODE
@@ -143,7 +100,8 @@ angular.module('AuthApp', [])
       views: {
         'tab-eventslist': {
           templateUrl: 'templates/events-list.html',
-          controller: 'EventsListCtrl'
+          controller: 'EventsListCtrl',
+	  		params: ['type','subtype']
         }
       }
     })
@@ -158,6 +116,26 @@ angular.module('AuthApp', [])
         }
       }
     })
+    
+    .state('menu.tab.faces_events', {
+      url: '/faces_events',
+      views: {
+        'tab-faces': {
+          templateUrl: 'templates/peep-events.html',
+          controller: 'PeepEventCtrl'
+        }
+      }
+    })
+
+	.state('menu.tab.faces_events_detail', {
+      url: '/faces_events_detail',
+      views: {
+        'tab-faces': {
+          templateUrl: 'templates/event-detail.html',
+          controller: 'EventDetailCtrl'
+        }
+      }
+    })
 
     .state('menu.tab.trending', {
       url: '/trending',
@@ -169,16 +147,40 @@ angular.module('AuthApp', [])
       }
     })
     
-     .state('menu.events', {
-      url: '/events_view/:type/:subtype',
+    .state('menu.tab.events_view', {
+     // url: '/events_view',
+      views: {
+      	'tab-eventslist': 
+	 	//'menuContent': 
+	 	{
+	 		templateUrl: 'templates/events-view.html',	  		
+	  		controller: 'EventsViewCtrl'
+	  		
+	  	}
+	  }
+    })
+    /*
+     .state('menu.events_view', {
+      url: '/events_view/',//:type/:subtype',
       views: {
 	 	'menuContent': {
 	 		templateUrl: 'templates/events-view.html',
 	  		controller: 'EventsViewCtrl'
 	  	}
 	  }
-    })   
+    })*/
     
+    .state('menu.tab.event_detail', {
+      url: '/event_detail',//:id',
+      views: {
+	 	'tab-eventslist': {
+	 		templateUrl: 'templates/event-detail.html',
+	  		controller: 'EventDetailCtrl'
+	  		
+	  	}
+	  }
+    }) 
+    /*
     .state('menu.event_detail', {
       url: '/event_detail/:id',
       views: {
@@ -187,7 +189,10 @@ angular.module('AuthApp', [])
 	  		controller: 'EventDetailCtrl'
 	  	}
 	  }
-    }) 
+    }) */
+    
+    
+    //MENU OPTIONS
 
     
     .state('menu.myevents', {
@@ -255,8 +260,8 @@ angular.module('AuthApp', [])
     
 ;
   // if none of the above states are matched, use this as the fallback
-  //$urlRouterProvider.otherwise('/sign-in');
-  $urlRouterProvider.otherwise('/menu/tab/eventslist');
+  $urlRouterProvider.otherwise('/sign-in');
+  //$urlRouterProvider.otherwise('/menu/tab/eventslist');
 
 });
 

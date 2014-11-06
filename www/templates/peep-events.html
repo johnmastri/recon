@@ -1,0 +1,39 @@
+<ion-view title="{{current_peep.first_name}}'s Events">
+	<!--<ion-header-bar class="bar-positive">
+        <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
+        <h1 class="title">{{current_peep.first_name}}'s Events</h1>
+    </ion-header-bar>
+      -->
+  <ion-content padding="true">
+  	<div class="list">
+<ion-list show-delete="shouldShowDelete" show-reorder="shouldShowReorder">
+ <div class="item item-divider">
+    Events {{current_peep.first_name}} is Attending
+  </div>
+    <ion-item item="item" class="pe" ng-repeat="item in events_attending" ng-click="showDetail(item)">
+    <div class="ea">
+    	<span class="et">{{item.title}}</span>
+	    <div class="ed dh">{{item.description}}</div>
+	    <div class="ed">Los Angeles Convention Center</div>
+	    <div class="ed">Los Angeles, CA</div>
+	 </div>
+    
+  </ion-item>
+  <div class="item item-divider">
+    Events {{current_peep.first_name}} is Maybe Attending
+  </div>
+    <ion-item item="item" class="pe" ng-repeat="item in events_maybe" ng-click="showDetail(item)">
+    <div class="ea">
+    	<span class="et">{{item.title}}</span>
+	    <div class="ed dh">{{item.description}}</div>
+	    <div class="ed">Los Angeles Convention Center</div>
+	    <div class="ed">Los Angeles, CA</div>
+	 </div>
+    
+  </ion-item>
+  
+</ion-list>
+  
+  </ion-content>
+
+</ion-view>

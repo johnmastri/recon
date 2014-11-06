@@ -1,7 +1,203 @@
 /* Empty. Add your own CSS if you like */
+
+@font-face {
+    font-family: 'interstate_cond_mono_-_blkRg';
+    src: url('../fonts/interstate_cond_mono__blk-webfont.eot');
+    src: url('../fonts/interstate_cond_mono__blk-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/interstate_cond_mono__blk-webfont.woff2') format('woff2'),
+         url('../fonts/interstate_cond_mono__blk-webfont.woff') format('woff'),
+         url('../fonts/interstate_cond_mono__blk-webfont.ttf') format('truetype'),
+         url('../fonts/interstate_cond_mono__blk-webfont.svg#interstate_cond_mono_-_blkRg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'gotham_bold';
+    src: url('../fonts/gotham-bold-webfont.eot');
+    src: url('../fonts/gotham-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/gotham-bold-webfont.woff') format('woff'),
+         url('../fonts/gotham-bold-webfont.ttf') format('truetype'),
+         url('../fonts/gotham-bold-webfont.svg#gotham_bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'gotham_light';
+    src: url('../fonts/gotham-light-webfont.eot');
+    src: url('../fonts/gotham-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/gotham-light-webfont.woff') format('woff'),
+         url('../fonts/gotham-light-webfont.ttf') format('truetype'),
+         url('../fonts/gotham-light-webfont.svg#gotham_light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'gotham_medium';
+    src: url('../fonts/gotham-medium-webfont.eot');
+    src: url('../fonts/gotham-medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/gotham-medium-webfont.woff') format('woff'),
+         url('../fonts/gotham-medium-webfont.ttf') format('truetype'),
+         url('../fonts/gotham-medium-webfont.svg#gotham_medium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'gotham_book';
+    src: url('../fonts/gotham-book-webfont.eot');
+    src: url('../fonts/gotham-book-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/gotham-book-webfont.woff') format('woff'),
+         url('../fonts/gotham-book-webfont.ttf') format('truetype'),
+         url('../fonts/gotham-book-webfont.svg#gotham_book') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
   cursor: url('http://ionicframework.com/img/finger.png'), auto;
+  font-family: "gotham_light" !important;
 }
+
+
+.title, input, p, .tab-title {
+	
+	font-family: "gotham_medium" !important;
+		
+}
+
+button {
+	
+	font-family: "gotham_medium" !important;
+	font-size: 12px !important;
+}
+
+.nav-bar, .bar-positive {
+	
+	background-color:white !important;
+	border: none;
+	
+}
+
+.ion-navicon, .ion-arrow-left-c {
+	
+	color: black !important;
+	
+}
+
+.title {
+	
+	color:black !important;
+	
+}
+
+/*TABS*/
+
+.tabs {
+	
+	background-color:white;
+	color: #34a8c8;
+	
+}
+
+
+/*EVENTS LIST*/
+
+.create-button {
+	
+	background-color :#7cbf42;
+	color: white;
+	border-radius: 0px;
+}
+
+
+.ea {
+	
+	float:left;
+	padding-bottom:10px;
+	
+}
+
+.ac {
+	
+	float:right;
+	margin-top:9px;
+	margin-right:15px;
+	text-align: center;
+}
+
+.acc {
+	
+	font-family: "interstate_cond_mono_-_blkRg" !important;
+	font-size:30px;
+	
+}
+
+.et {
+	
+	font-family: "gotham_medium" !important;
+	font-size: 14px !important;
+	line-height: 15px;
+}
+
+
+
+.ed {
+	
+	font-family: "gotham_light" !important;
+	font-size: 12px !important;
+	line-height: 14px;
+		
+}
+
+.dh {
+
+	font-family: "gotham_medium" !important;
+	font-size: 11px !important;
+	color: #30a443;
+	
+}
+
+.evl {
+	
+	font-size: 20px !important;
+	border-left: none;
+	border-right: none;
+	border-color: #f7a61b;
+}
+
+
+/*MY EVENTS*/
+
+.item-divider, .item-complex {
+
+	background-color:white;
+	border-left: none;
+	border-right: none;
+	letter-spacing: -.78px;
+	
+}
+
+.item-divider {
+	
+	font-family:"gotham_light" !important;
+	font-size:11px;
+	
+}
+
+
+/*PEEP EVENTS*/
+
+.pe {
+	
+	border-left: none;
+	border-right: none;
+	
+}
+
 
 .bar.item-input-inset .item-input-wrapper input {
     width: 100%;
@@ -18,3 +214,33 @@ body {
 .search-wrapper-light input, .search-wrapper-light input::-webkit-input-placeholder {
     color: #ffffff;
 }
+
+input {
+	
+	background-color:aqua;
+		
+}
+
+.ng-touched {
+	
+	border:1px solid black;
+	
+}
+/*
+input.ng-invalid.ng-dirty.ng-invalid-email {
+    background-color: #FA787E;
+}
+
+input.ng-invalid.ng-dirty.ng-valid-email {
+    background-color: #FA787E;
+}
+
+input.ng-valid.ng-dirty {
+    background-color: #78FA89;
+}*/
+
+.tq-validate.ng-invalid {
+      background-color: #FA787E;
+    }
+    
+

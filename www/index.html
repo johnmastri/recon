@@ -5,47 +5,66 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
-	
-    <!--<link href="css/bootstrap.min.css" rel="stylesheet">
-    -->
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/swipe.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/ion-google-place.css" rel="stylesheet">
-    <link href="css/datetimepicker.css" rel="stylesheet">
-    <!--<link href="css/autocomplete.min.css" rel="stylesheet">
-    -->
     
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
     <!-- ionic/angularjs js -->
+    <script src="js/angular-file-upload-html5-shim.min.js"></script>    
+    
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="js/ionic.swipecards.js"></script>
 	<script src="js/parse-1.3.0.min.js"></script>
-	
-	<!--<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
-	<script src="js/autocomplete.js"></script>
-	-->
-	
+	<script src="js/autocomplete.js"></script>	
 	<script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-	<script src="js/ion-google-place.js"></script>
 	
-		
-	<script src="js/moment.js"></script>
-
-	<script src="js/datetimepicker.js"></script>
-    <!-- cordova script (this will be a 404 during development) -->
+	<script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="cordova.js"></script>
+	
+	 <script src="js/angular-file-upload.min.js"></script> 
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
+    
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+    
+    
+    
   </head>
   <body ng-app="starter" animation="slide-left-right-ios7">
+    <ion-nav-view></ion-nav-view>  
+    
+    <script id="my-popover.html" type="text/ng-template">
+    <style>
+    	ion-popover-view {
+	    	width:95% !important;
+	    	left:2.5% !important;
+	    	
+    	}
+    </style>
+    
+    
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">Location</h1>
+    </ion-header-bar>
+    <ion-content ng-controller="PopoverCtrl">
+      <div class="item item-input-inset">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="Enter Address Here" ng-model="event.location">
+    </label>
+    
+    <!--<button class="button button-small">
+      Submit
+    </button>-->
+  </div>
+  <ion-list>
+		<ion-item ng-repeat="value in list_values" ng-click="selectAddress(value)">{{value.description}}</ion-item>
+   </ion-list>
 
-    <ion-nav-view></ion-nav-view>    
+    </ion-content>
+  </ion-popover-view>
+</script>  
   </body>
 </html>

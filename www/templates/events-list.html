@@ -1,57 +1,25 @@
-<ion-view title="Events">
-  <ion-content class="padding">
-  
-  <!-- <div ng-controller="Logins">
-    <div ng-hide="currentUser">
-	    <form ng-show="scenario == 'Sign up'">
-	      <h2>Sign up</h2>
-	      Email: <input type="email" ng-model="user.email" /><br />
-	      Username: <input type="text" ng-model="user.username" /><br />
-	      Password: <input type="password" ng-model="user.password" /><br />
-	      <button ng-click="signUp(user)">Sign up</button>
-	      or <a href="#" ng-click='scenario="Log in"'>Log in</a>
-	    </form>
-	    
-	    <form ng-show="scenario == 'Log in'">
-	      <h2>Log in</h2>
-	      Username: <input type="text" ng-model="user.username" /><br />
-	      Password: <input type="password" ng-model="user.password" /><br />
-	      <button ng-click="logIn(user)">Log in</button>
-	      or <a href="#" ng-click='scenario="Sign up"'>Sign up</a>
-	    </form>
-	  </div>
-	  
-	  <div ng-show="currentUser">
-	    <h1>Welcome {{currentUser.get('username')}}</h1>
-	    <p> You have been successfully logged in</p>
-	    <button ng-click="logOut(user)">Log out</button>
-	  </div>
-  </div>
-  <div ng-controller="CreateEvent">
-	  <form>
-	      <h2>Create Event</h2>
-	      Event Title: <input type="text" ng-model="event.title" /><br />
-	      <button ng-click="create(event)">Create Event</button>
-	    </form>
-  </div>
-  <div ng-controller="ListEvents">
-      <ion-list>
-        <ion-item ng-repeat="item in items">
-        {{item.title}}
-        </ion-item>
-    </ion-list>
-  </div> -->
+<ion-view title="Playground">
+  <ion-content padding="true">
     
-    <div class="scroll" ng-controller="EventListViewCtrl">
-    	<div>
-    	<button class="button button-block button-dark" ng-click="modal.show()">Create An Event</button>
-    	<select ng-model="view_select_value" ng-options="select_option.name for select_option in select_options"></select>
-    	</div>
-    	<div class="list">
-    	<ion-list>
-    	    <ion-item ng-repeat="value in list_values" ng-click="showBy(value)" href="#/menu/events_view/{{view_select_value.name}}/{{value | lowercase}}">{{value}}</ion-item>
+    <div ng-controller="EventListViewCtrl">
+    <div class="ea">
+    	<span class="et">Awesome Sauce Expo 2014</span>
+	    <div class="ed dh">December 5 - December 7</div>
+	    <div class="ed">Los Angeles Convention Center</div>
+	    <div class="ed">Los Angeles, CA</div>
+	 </div>
+	 <div class="ac">
+    	<span class="acc">234</span>
+	    <div class="ed dh">attending</div>
+	 </div>
+    
+    	<button class="button button-block create-button" ng-click="createEvent()">Create An Event</button>
+		<!--<select ng-model="view_select_value" ng-options="select_option.name for select_option in select_options"></select> -->
+    	<ion-list class="evl">
+    	    <!-- <ion-item ng-repeat="value in list_values" ng-click="showBy(value)" href="#/menu/events_view/{{view_select_value.name}}/{{value | lowercase}}">{{value}}</ion-item> -->
+			<ion-item class="evl" ng-repeat="value in list_values" ng-click="showBy(value)">{{value}}</ion-item>
     	 </ion-list>		
-    	</div>
+    	
     </div>
     
   </ion-content>
